@@ -42,7 +42,7 @@ jobs:
 
       - name: Prepare profile
         run: |
-          echo "[eastus2]" >> ~/.databrickscfg
+          echo "[demo]" >> ~/.databrickscfg
           echo "host = $DATABRICKS_HOST" >> ~/.databrickscfg
           echo "token = $DATABRICKS_TOKEN" >> ~/.databrickscfg
 
