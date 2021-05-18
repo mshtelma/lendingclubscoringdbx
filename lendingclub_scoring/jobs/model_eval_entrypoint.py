@@ -1,7 +1,7 @@
-
 from lendingclub_scoring.common import Job
 from lendingclub_scoring.config.ConfigProvider import read_config, setupMlflowConf
 from lendingclub_scoring.pipelines.LendingClubModelEvaluationPipeline import LendingClubModelEvaluationPipeline
+
 
 class ModelEvalJob(Job):
 
@@ -20,7 +20,8 @@ class ModelEvalJob(Job):
         self.logger.info("Launching bootstrap job")
 
         experimentID = setupMlflowConf(self.conf)
-        p = LendingClubModelEvaluationPipeline(self.spark, experimentID, self.conf['data-path'], self.conf['model-name'])
+        p = LendingClubModelEvaluationPipeline(self.spark, experimentID, self.conf['model-name'],
+                                               self.conf['data-path'])
         p.run()
 
         self.logger.info("Bootstrap job finished!")
