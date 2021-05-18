@@ -1,0 +1,9 @@
+{
+  "environments": {
+    "default": {
+      "profile": "demo",
+      "workspace_dir": "/Users/michael.shtelma@databricks.com/lendingclub_scoring_dbx",
+      "artifact_location": "dbfs:/Users/dbx/lendingclub_scoring_dbx"
+    }
+  }
+}
