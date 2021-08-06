@@ -23,13 +23,15 @@ class LendingClubConsumerPipeline():
         df = self.data_provider.load_and_transform_data_consumer()
         df.createOrReplaceTempView("loans")
 
-        self.spark.udf.register("model", mlflow.pyfunc.spark_udf(self.spark, model_uri='models:/{}/{}'.format(self.model_name, self.stage)))
+        self.spark.udf.register("model", mlflow.pyfunc.spark_udf(self.spark,
+                                                                 model_uri='models:/{}/{}'.format(self.model_name, self.stage)))
 
         self.spark.sql("""
         select *, model(term, home_ownership, purpose, addr_state, verification_status, application_type, loan_amnt, emp_length,
          annual_inc,dti, delinq_2yrs, revol_util, total_acc, credit_length_in_years, int_rate, net, issue_year) as prediction 
         from loans
         """).write.format('delta').mode('overwrite').save(self.output_path)
+        print(' ')
 
 
 
