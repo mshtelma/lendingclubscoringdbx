@@ -54,5 +54,6 @@ class LendingClubTrainingPipeline():
         mlflow.log_metric("mse", mse)
         mlflow.log_metric("mae", mae)
         mlflow.log_metric("r2", r2)
+        print('hhh')
 
         mlflow.set_tag('candidate', 'true')
