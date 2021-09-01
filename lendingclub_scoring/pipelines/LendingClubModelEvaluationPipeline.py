@@ -9,7 +9,7 @@ from lendingclub_scoring.data.DataProvider import LendingClubDataProvider
 
 
 class LendingClubModelEvaluationPipeline():
-    def  __init__(self, spark, experimentID, model_name, input_path, limit=None):
+    def __init__(self, spark, experimentID, model_name, input_path, limit=None):
         self.spark = spark
         self.input_path = input_path
         self.model_name = model_name
@@ -39,11 +39,26 @@ class LendingClubModelEvaluationPipeline():
             time.sleep(15)
             mlflow_client.transition_model_version_stage(name=self.model_name, version=model_version.version,
                                                          stage="Production")
+            prod_metric = best_cand_roc
+            prod_run_id = best_cand_run_id
+            deployed = True
             print('Deployed version: ', model_version.version)
+        else:
+            prod_metric = best_prod_roc
+            prod_run_id = best_prod_run_id
+            deployed = False
+
+        with mlflow.start_run(run_name="Evaluation") as run:
+            mlflow.log_metric("prod_metric", best_prod_roc)
+            mlflow.log_metric("cand_metric", best_cand_roc)
+            mlflow.log_metric("prod_metric", prod_metric)
+            mlflow.log_param("prod_run_uuid", prod_run_id)
+            mlflow.log_param("deployed", deployed)
+            mlflow.set_tag("action", "model-eval")
+
         # remove candidate tags
         for run_id in cand_run_ids:
             mlflow_client.set_tag(run_id, 'candidate', 'false')
-
 
     def get_best_model(self, run_ids, X, Y):
         best_roc = -1

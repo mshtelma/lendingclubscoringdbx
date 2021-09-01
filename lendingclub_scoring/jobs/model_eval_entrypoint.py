@@ -6,15 +6,7 @@ from lendingclub_scoring.pipelines.LendingClubModelEvaluationPipeline import Len
 class ModelEvalJob(Job):
 
     def init_adapter(self):
-        if not self.conf:
-            self.logger.info("Init configuration was not provided, using configuration from default_init method")
-            self.conf = {
-                "experiment-path": "/Users/michael.shtelma@databricks.com/experiments/leclub1",
-                "data-path": "dbfs:/databricks-datasets/samples/lending_club/parquet",
-                "model-name": "LendingClubScoringModel"
-            }
-        else:
-            self.logger.info("Init configuration is already provided")
+        pass
 
     def launch(self):
         self.logger.info("Launching bootstrap job")
