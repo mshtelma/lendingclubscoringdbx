@@ -1,13 +1,16 @@
+import numpy as np
+import pandas as pd
 from pyspark.sql import Window
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from sklearn.model_selection import train_test_split
-
+from typing import Tuple
 
 predictors = ["term", "home_ownership", "purpose", "addr_state", "verification_status", "application_type",
               "loan_amnt", "emp_length", "annual_inc", "dti", "delinq_2yrs", "revol_util", "total_acc",
               "credit_length_in_years", "int_rate", "net", "issue_year"]
 target = 'bad_loan'
+
 
 class LendingClubDataProvider():
     def __init__(self, spark, input_path, limit=None):
@@ -15,7 +18,7 @@ class LendingClubDataProvider():
         self.input_path = input_path
         self.limit = limit
 
-    def load_and_transform_data(self):
+    def load_and_transform_data(self) -> DataFrame:
         df = self.spark.read.format("parquet").load(self.input_path)
         if self.limit:
             df = df.limit(self.limit)
@@ -43,14 +46,14 @@ class LendingClubDataProvider():
         df = df.withColumn('net', round(df.total_pymnt - df.loan_amnt, 2))
         return df
 
-    def handle_cat_types(self, df):
+    def handle_cat_types(self, df: pd.DataFrame):
         for col in df.columns:
             if df.dtypes[col] == 'object':
                 df[col] = df[col].astype('category').cat.codes
             df[col] = df[col].fillna(0)
         return df
 
-    def prepare_training_and_test_sets(self, df):
+    def prepare_training_and_test_sets(self, df: DataFrame) -> Tuple[np.array, np.array, np.array, np.array]:
         X_train, X_test, Y_train, Y_test = train_test_split(df[predictors], df[target], test_size=0.3)
         return X_train, X_test, Y_train, Y_test
 
@@ -59,7 +62,7 @@ class LendingClubDataProvider():
         df = self.handle_cat_types(df)
         return self.prepare_training_and_test_sets(df)
 
-    def load_and_transform_data_consumer(self):
+    def load_and_transform_data_consumer(self) -> DataFrame:
         df = self.load_and_transform_data().toPandas()
         df = self.handle_cat_types(df)
         return self.spark.createDataFrame(df)
