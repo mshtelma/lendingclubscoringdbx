@@ -1,8 +1,8 @@
 {
   "environments": {
     "default": {
-      "profile": "e2fieldeng",
-      "workspace_dir": "/Users/Michael.Shtelma@databricks.com/lendingclub_scoring_dbx",
+      "profile": "e2demowest",
+      "workspace_dir": "/Users/michael.shtelma@databricks.com/lendingclub_scoring_dbx",
       "artifact_location": "dbfs:/Users/msh/dbx/lendingclub_scoring_dbx"
     }
   }
