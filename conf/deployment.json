@@ -8,13 +8,6 @@
                     "node_type_id": "i3.xlarge",
                     "num_workers": 2
                 },
-                "libraries": [],
-                "email_notifications": {
-                    "on_start": [],
-                    "on_success": [],
-                    "on_failure": []
-                },
-                "max_retries": 0,
                 "spark_python_task": {
                     "python_file": "lendingclub_scoring/jobs/abtest_entrypoint.py",
                     "parameters": [
@@ -30,18 +23,11 @@
                     "node_type_id": "i3.xlarge",
                     "num_workers": 2
                 },
-                "libraries": [],
-                "email_notifications": {
-                    "on_start": [],
-                    "on_success": [],
-                    "on_failure": []
-                },
-                "max_retries": 0,
                 "spark_python_task": {
                     "python_file": "lendingclub_scoring/jobs/consumer_entrypoint.py",
                     "parameters": [
                         "--conf-file",
-                        "conf/test/sample.json"
+                        "conf/lendingclub_config.json"
                     ]
                 }
             },
@@ -52,18 +38,11 @@
                     "node_type_id": "i3.xlarge",
                     "num_workers": 2
                 },
-                "libraries": [],
-                "email_notifications": {
-                    "on_start": [],
-                    "on_success": [],
-                    "on_failure": []
-                },
-                "max_retries": 0,
                 "spark_python_task": {
                     "python_file": "lendingclub_scoring/jobs/train_entrypoint.py",
                     "parameters": [
                         "--conf-file",
-                        "conf/test/sample.json"
+                        "conf/lendingclub_config.json"
                     ]
                 }
             },
@@ -74,18 +53,11 @@
                     "node_type_id": "i3.xlarge",
                     "num_workers": 2
                 },
-                "libraries": [],
-                "email_notifications": {
-                    "on_start": [],
-                    "on_success": [],
-                    "on_failure": []
-                },
-                "max_retries": 0,
                 "spark_python_task": {
                     "python_file": "lendingclub_scoring/jobs/model_eval_entrypoint.py",
                     "parameters": [
                         "--conf-file",
-                        "conf/test/sample.json"
+                        "conf/lendingclub_config.json"
                     ]
                 }
             },
@@ -96,15 +68,19 @@
                     "node_type_id": "i3.xlarge",
                     "num_workers": 1
                 },
-                "libraries": [],
-                "email_notifications": {
-                    "on_start": [],
-                    "on_success": [],
-                    "on_failure": []
-                },
-                "max_retries": 0,
                 "spark_python_task": {
                     "python_file": "tests/integration/sample_test.py"
+                }
+            },
+            {
+                "name": "test-pipeline",
+                "new_cluster": {
+                    "spark_version": "10.4.x-cpu-ml-scala2.12",
+                    "node_type_id": "i3.xlarge",
+                    "num_workers": 1
+                },
+                "spark_python_task": {
+                    "python_file": "lendingclub_scoring/jobs/test_entrypoint.py"
                 }
             }
         ]

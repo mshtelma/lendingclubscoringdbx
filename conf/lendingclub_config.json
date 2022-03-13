@@ -1,0 +1,12 @@
+{
+  "output_format": "delta",
+  "experiment-path": "/Shared/leclub1",
+  "data-path": "dbfs:/databricks-datasets/samples/lending_club/parquet",
+  "model-name": "LendingClubScoringModel",
+  "output-path": "dbfs:/tmp/msh/leout",
+  "stage": "Production",
+  "model_deployment_type": "sagemaker",
+  "sagemaker_endpoint_name": "shared-endpoint",
+  "sagemaker_image_url": "997819012307.dkr.ecr.us-west-2.amazonaws.com/mlflow-pyfunc:1.11.0",
+  "sagemaker_region": "us-west-2"
+}

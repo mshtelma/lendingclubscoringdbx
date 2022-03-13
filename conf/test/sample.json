@@ -1,8 +1,0 @@
-{
-  "output_format": "delta",
-  "experiment-path": "/Users/Michael.Shtelma@databricks.com/experiments/leclub1",
-  "data-path": "dbfs:/databricks-datasets/samples/lending_club/parquet",
-  "model-name": "LendingClubScoringModel",
-  "output-path": "dbfs:/tmp/msh/leout",
-  "stage": "Production"
-}

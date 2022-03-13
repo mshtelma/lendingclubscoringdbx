@@ -35,6 +35,11 @@ jobs:
           pip install -r unit-requirements.txt
           pip install -e .
 
+      - name: Lint
+        run: |
+          prospector  --with-tool mypy  --profile prospector.yaml
+          black --check .
+
       - name: Run unit tests
         run: |
           echo "Launching unit tests"
