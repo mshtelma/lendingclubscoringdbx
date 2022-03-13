@@ -48,17 +48,17 @@ jobs:
 
       - name: Prepare profile
         run: |
-          echo "[TEST]" >> ~/.databrickscfg
+          echo "[e2fieldeng]" >> ~/.databrickscfg
           echo "host = $DATABRICKS_HOST" >> ~/.databrickscfg
           echo "token = $DATABRICKS_TOKEN" >> ~/.databrickscfg
 
       - name: Deploy integration test
         run: |
-          dbx deploy --jobs=lendingclub_scoring_dbx-sample-integration-test --environment=TEST
+          dbx deploy --jobs=lendingclub_scoring_dbx-sample-integration-test
 
       - name: Run integration test
         run: |
-          dbx launch --job=lendingclub_scoring_dbx-sample-integration-test --trace  --environment=TEST
+          dbx launch --job=lendingclub_scoring_dbx-sample-integration-test --trace
 
 
 
