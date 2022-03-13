@@ -54,11 +54,11 @@ jobs:
 
       - name: Deploy integration test
         run: |
-          dbx deploy --jobs=lendingclub_scoring_dbx-sample-integration-test --profile=TEST
+          dbx deploy --jobs=lendingclub_scoring_dbx-sample-integration-test --environment=TEST
 
       - name: Run integration test
         run: |
-          dbx launch --job=lendingclub_scoring_dbx-sample-integration-test --trace  --profile=TEST
+          dbx launch --job=lendingclub_scoring_dbx-sample-integration-test --trace  --environment=TEST
 
 
 
