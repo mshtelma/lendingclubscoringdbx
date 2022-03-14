@@ -7,7 +7,7 @@ from pyspark.dbutils import DBUtils
 class SampleJobIntegrationTest(unittest.TestCase):
     def setUp(self):
 
-        self.test_dir = "dbfs:/tmp/tests/sample/%s" % str(uuid4())
+        self.test_dir = f"dbfs:/tmp/tests/sample/{str(uuid4())}"
         self.test_config = {"output_format": "delta", "output_path": self.test_dir}
 
         self.job = TrainJob(init_conf=self.test_config)
