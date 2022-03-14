@@ -7,12 +7,11 @@ from lendingclub_scoring.pipelines.LendingClubTrainingPipeline import (
 
 class TrainJob(Job):
     def init_adapter(self):
-        pass
+        self.experiment_id = setup_mlflow_config(self.conf)
 
     def launch(self):
         self.logger.info("Launching bootstrap job")
 
-        setup_mlflow_config(self.conf)
         p = LendingClubTrainingPipeline(
             self.spark, self.conf["data-path"], self.conf["model-name"]
         )

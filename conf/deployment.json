@@ -69,18 +69,11 @@
                     "num_workers": 1
                 },
                 "spark_python_task": {
-                    "python_file": "tests/integration/sample_test.py"
-                }
-            },
-            {
-                "name": "test-pipeline",
-                "new_cluster": {
-                    "spark_version": "10.4.x-cpu-ml-scala2.12",
-                    "node_type_id": "i3.xlarge",
-                    "num_workers": 1
-                },
-                "spark_python_task": {
-                    "python_file": "lendingclub_scoring/jobs/test_entrypoint.py"
+                    "python_file": "tests/integration/sample_test.py",
+                    "parameters": [
+                        "--conf-file",
+                        "conf/lendingclub_config.json"
+                    ]
                 }
             }
         ]
