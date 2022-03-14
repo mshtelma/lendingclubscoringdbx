@@ -12,11 +12,9 @@ from lendingclub_scoring.pipelines.LendingClubTrainingPipeline import (
 
 # COMMAND ----------
 
-conf = json.load(open('../conf/lendingclub_config.json'))
+conf = json.load(open("../conf/lendingclub_config.json"))
 experiment_id = setup_mlflow_config(conf)
 p = LendingClubTrainingPipeline(spark, conf["data-path"], conf["model-name"])
 p.run()
 
 # COMMAND ----------
-
-

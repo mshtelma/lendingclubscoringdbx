@@ -39,7 +39,7 @@ jobs:
       - name: Lint
         run: |
           prospector  --with-tool mypy  --profile prospector.yaml
-          black --check .
+          black --check lendingclub_scoring
 
       - name: Run unit tests
         run: |
