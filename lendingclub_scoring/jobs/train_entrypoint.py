@@ -12,9 +12,7 @@ class TrainJob(Job):
     def launch(self):
         self.logger.info("Launching bootstrap job")
 
-        p = LendingClubTrainingPipeline(
-            self.spark, self.conf["data-path"], self.conf["model-name"]
-        )
+        p = LendingClubTrainingPipeline(self.spark, self.conf)
         p.run()
 
         self.logger.info("Bootstrap job finished!")

@@ -30,6 +30,7 @@ pylint:
     - unnecessary-pass
     - raise-missing-from # pretty strange requirement with acquaint logic
     - redefined-builtin
+    - broad-except
 
 pep8:
   disable: W293 # disabled because we have newlines in docstrings

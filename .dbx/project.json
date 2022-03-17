@@ -1,7 +1,7 @@
 {
   "environments": {
     "default": {
-      "profile": "e2fieldeng",
+      "profile": "demo",
       "workspace_dir": "/Shared/lendingclub_scoring_dbx",
       "artifact_location": "dbfs:/Users/msh/dbx/lendingclub_scoring_dbx"
     }
