@@ -4,9 +4,12 @@
       {
         "name": "abtest-pipeline",
         "new_cluster": {
-          "spark_version": "8.2.x-cpu-ml-scala2.12",
-          "node_type_id": "i3.xlarge",
-          "num_workers": 2
+          "spark_version": "10.5.x-cpu-ml-scala2.12",
+          "num_workers": 0,
+          "spark_conf": {
+            "spark.master": "local[*, 4]",
+            "spark.databricks.cluster.profile": "singleNode"
+          }
         },
         "spark_python_task": {
           "python_file": "lendingclub_scoring/jobs/abtest_entrypoint.py",
@@ -19,9 +22,12 @@
       {
         "name": "consumer-pipeline",
         "new_cluster": {
-          "spark_version": "8.2.x-cpu-ml-scala2.12",
-          "node_type_id": "i3.xlarge",
-          "num_workers": 2
+          "spark_version": "10.5.x-cpu-ml-scala2.12",
+          "num_workers": 0,
+          "spark_conf": {
+            "spark.master": "local[*, 4]",
+            "spark.databricks.cluster.profile": "singleNode"
+          }
         },
         "spark_python_task": {
           "python_file": "lendingclub_scoring/jobs/consumer_entrypoint.py",
@@ -34,7 +40,7 @@
       {
         "name": "training-pipeline",
         "new_cluster": {
-          "spark_version": "8.2.x-cpu-ml-scala2.12",
+          "spark_version": "10.5.x-cpu-ml-scala2.12",
           "node_type_id": "i3.xlarge",
           "num_workers": 2
         },
@@ -49,9 +55,13 @@
       {
         "name": "model-eval-pipeline",
         "new_cluster": {
-          "spark_version": "8.2.x-cpu-ml-scala2.12",
+          "spark_version": "10.5.x-cpu-ml-scala2.12",
+          "num_workers": 0,
           "node_type_id": "i3.xlarge",
-          "num_workers": 2
+          "spark_conf": {
+            "spark.master": "local[*, 4]",
+            "spark.databricks.cluster.profile": "singleNode"
+          }
         },
         "spark_python_task": {
           "python_file": "lendingclub_scoring/jobs/model_eval_entrypoint.py",
@@ -64,7 +74,7 @@
       {
         "name": "webhook-pipeline",
         "new_cluster": {
-          "spark_version": "10.3.x-cpu-ml-scala2.12",
+          "spark_version": "10.5.x-cpu-ml-scala2.12",
           "node_type_id": "i3.xlarge",
           "num_workers": 0,
           "spark_conf": {
@@ -83,9 +93,13 @@
       {
         "name": "lendingclub_scoring_dbx-sample-integration-test",
         "new_cluster": {
-          "spark_version": "8.2.x-cpu-ml-scala2.12",
+          "spark_version": "10.5.x-cpu-ml-scala2.12",
           "node_type_id": "i3.xlarge",
-          "num_workers": 1
+          "num_workers": 0,
+          "spark_conf": {
+            "spark.master": "local[*, 4]",
+            "spark.databricks.cluster.profile": "singleNode"
+          }
         },
         "spark_python_task": {
           "python_file": "tests/integration/sample_test.py",
