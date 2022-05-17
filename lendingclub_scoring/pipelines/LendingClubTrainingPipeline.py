@@ -5,14 +5,6 @@ import mlflow.sklearn
 from mlflow.models import infer_signature
 from pyspark.sql import SparkSession
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import (
-    accuracy_score,
-    roc_auc_score,
-    mean_squared_error,
-    mean_absolute_error,
-    r2_score,
-)
 from lendingclub_scoring.data.DataProvider import LendingClubDataProvider
 from lendingclub_scoring.webhooks import setup_webhook_for_model
 
