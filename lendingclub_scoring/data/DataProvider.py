@@ -134,7 +134,7 @@ class LendingClubDataProvider:
 
     def run(self):
         spark_df = self.load_and_transform_data()
-        print(f'Loading dataset: {spark_df.count()} rows...')
+        print(f"Loading dataset: {spark_df.count()} rows...")
         df = spark_df.toPandas()
         df = self.handle_cat_types(df)
         return self.prepare_training_and_test_sets(df)

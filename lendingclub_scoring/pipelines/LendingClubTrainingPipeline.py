@@ -32,7 +32,9 @@ class LendingClubTrainingPipeline:
             _model_name = None
             if self.conf.get("training_promote_candidates", False):
                 _model_name = self.model_name
-            mlflow.sklearn.log_model(cl, "model", registered_model_name=_model_name, signature=signature)
+            mlflow.sklearn.log_model(
+                cl, "model", registered_model_name=_model_name, signature=signature
+            )
             mlflow.set_tag("action", "training")
             self.eval_and_log_metrics(cl, x_test, y_test)
             if self.conf.get("training_webhook_for_model_eval", False):
