@@ -14,5 +14,6 @@
   "sagemaker_endpoint_name": "shared-endpoint",
   "sagemaker_image_url": "997819012307.dkr.ecr.us-west-2.amazonaws.com/mlflow-pyfunc:1.11.0",
   "sagemaker_region": "us-west-2",
-  "consumer_stage": "Production"
+  "consumer_stage": "Production",
+  "test": "test"
 }
