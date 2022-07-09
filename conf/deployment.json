@@ -93,7 +93,7 @@
         }
       },
       {
-        "name": "lendingclub_scoring_dbx-sample-integration-test-rvp",
+        "name": "lendingclub_scoring_dbx-sample-integration-test",
         "new_cluster": {
           "spark_version": "10.5.x-cpu-ml-scala2.12",
           "node_type_id": "i3.xlarge",

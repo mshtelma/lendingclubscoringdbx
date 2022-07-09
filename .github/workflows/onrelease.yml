@@ -50,14 +50,14 @@ jobs:
 
       - name: Deploy integration test
         run: |
-          dbx deploy --jobs=lendingclub_scoring_dbx-sample-integration-test-rvp
+          dbx deploy --jobs=lendingclub_scoring_dbx-sample-integration-test
 
       - name: Run integration test
         run: |
-          dbx launch --job=lendingclub_scoring_dbx-sample-integration-test-rvp --trace
+          dbx launch --job=lendingclub_scoring_dbx-sample-integration-test --trace
 
       - name: Deploy the job
         run: |
-          dbx deploy --jobs=lendingclub_scoring_dbx-sample-rvp
+          dbx deploy --jobs=lendingclub_scoring_dbx-sample
 
 

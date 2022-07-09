@@ -1,9 +1,9 @@
 {
   "output_format": "delta",
-  "experiment-path": "/Shared/dbx/projects/lendingclubscoringdbx-rvp",
+  "experiment-path": "/Shared/dbx/projects/lendingclubscoringdbx",
   "data-path": "dbfs:/databricks-datasets/samples/lending_club/parquet",
-  "model-name": "LendingClubScoringModelRVP",
-  "output-path": "dbfs:/tmp/rvp/le_abtest",
+  "model-name": "LendingClubScoringModel",
+  "output-path": "dbfs:/tmp/le_abtest",
   "prod_version": "5",
   "test_version": "6"
 }

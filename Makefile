@@ -5,7 +5,7 @@ test:
 	pytest tests/unit
 
 job:
-	dbx launch --job=lendingclub_scoring_dbx-sample-integration-test-rvp --trace
+	dbx launch --job=lendingclub_scoring_dbx-sample-integration-test --trace
 
 clean:
 	rm -rf *.egg-info && rm -rf .pytest_cache
