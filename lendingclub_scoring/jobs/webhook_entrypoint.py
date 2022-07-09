@@ -16,7 +16,7 @@ class WHModelEvalJob(Job):
     def init_adapter(self):
         self.conf = {
             "model_eval_mode": "promoted_candidates",
-            "experiment-path": "/Shared/leclub1",
+            "experiment-path": "/Shared/dbx/projects/lendingclubscoringdbx-rvp",
             "data-path": "dbfs:/databricks-datasets/samples/lending_club/parquet",
             "model-name": "LendingClubScoringModel",
             "training_webhook_model_eval_stage": "Staging",

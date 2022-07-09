@@ -1,9 +1,9 @@
 {
-  "environments": {
-    "default": {
-      "profile": "demo",
-      "workspace_dir": "/Shared/lendingclub_scoring_dbx",
-      "artifact_location": "dbfs:/Users/rvp/dbx/lendingclub_scoring_dbx"
+    "environments": {
+        "default": {
+            "profile": "demo",
+            "workspace_dir": "/Shared/dbx/projects/lendingclubscoringdbx-rvp",
+            "artifact_location": "dbfs:/dbx/lendingclubscoringdbx-rvp"
+        }
     }
-  }
 }
