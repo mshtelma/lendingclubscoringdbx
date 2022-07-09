@@ -6,6 +6,7 @@
         "new_cluster": {
           "spark_version": "10.5.x-cpu-ml-scala2.12",
           "num_workers": 0,
+          "node_type_id": "i3.xlarge",
           "spark_conf": {
             "spark.master": "local[*, 4]",
             "spark.databricks.cluster.profile": "singleNode"
@@ -24,6 +25,7 @@
         "new_cluster": {
           "spark_version": "10.5.x-cpu-ml-scala2.12",
           "num_workers": 0,
+          "node_type_id": "i3.xlarge",
           "spark_conf": {
             "spark.master": "local[*, 4]",
             "spark.databricks.cluster.profile": "singleNode"
