@@ -6,7 +6,7 @@ os.environ["DATABRICKS_HOST"] = "https://e2-demo-field-eng.cloud.databricks.com/
 os.environ["DATABRICKS_TOKEN"] = ""
 
 # set experiment
-experiment_path = "/Users/Michael.Shtelma@databricks.com/experiments/leclub1"
+experiment_path = "/Users/rafael.pierre@databricks.com/experiments/leclub1"
 mlflow.set_experiment(experiment_path)
 
 # tracking
