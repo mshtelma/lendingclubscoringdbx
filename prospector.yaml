@@ -32,10 +32,10 @@ pylint:
     - redefined-builtin
     - broad-except
 
-pep8:
+pycodestyle:
   disable: W293 # disabled because we have newlines in docstrings
 
-pep257:
+pydocstyle:
   disable:
     - D100
     - D101

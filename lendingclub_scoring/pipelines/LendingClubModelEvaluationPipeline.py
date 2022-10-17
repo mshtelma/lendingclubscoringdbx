@@ -125,7 +125,7 @@ class LendingClubModelEvaluationPipeline:
     def get_candidate_models(self) -> List[str]:
         spark_df = self.spark.read.format("mlflow-experiment").load(self.experiment_id)
         pdf = spark_df.where("tags.candidate='true'").select("run_id").toPandas()
-        return pdf["run_id"].values
+        return pdf["run_id"].values  # type: ignore
 
     def get_promoted_candidate_models(self, stage: str = "None") -> List[str]:
         mlflow_client = MlflowClient()
