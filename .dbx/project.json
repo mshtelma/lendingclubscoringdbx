@@ -1,9 +1,13 @@
 {
     "environments": {
         "default": {
-            "profile": "default",
-            "workspace_dir": "/Shared/dbx/projects/lendingclubscoringdbx",
-            "artifact_location": "dbfs:/dbx/lendingclubscoringdbx"
+            "profile": "DEFAULT",
+            "storage_type": "mlflow",
+            "properties": {
+                "workspace_directory": "/Shared/dbx/projects/lendingclubscoringdbx",
+                "artifact_location": "dbfs:/dbx/lendingclubscoringdbx"
+            }
         }
-    }
+    },
+    "inplace_jinja_support": true
 }

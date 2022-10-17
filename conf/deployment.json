@@ -1,116 +1,105 @@
 {
-  "default": {
-    "jobs": [
-      {
-        "name": "abtest-pipeline",
-        "new_cluster": {
-          "spark_version": "10.5.x-cpu-ml-scala2.12",
-          "num_workers": 0,
-          "node_type_id": "i3.xlarge",
-          "spark_conf": {
-            "spark.master": "local[*, 4]",
-            "spark.databricks.cluster.profile": "singleNode"
+  "build": {
+    "python": "pip"
+  },
+  "environments": {
+    "default": {
+      "workflows": [
+        {
+          "name": "consumer-pipeline",
+          "new_cluster": {
+            "spark_version": "10.5.x-cpu-ml-scala2.12",
+            "num_workers": 0,
+            "node_type_id": "i3.xlarge",
+            "spark_conf": {
+              "spark.master": "local[*, 4]",
+              "spark.databricks.cluster.profile": "singleNode"
+            }
+          },
+          "python_wheel_task": {
+            "package_name": "lendingclub_scoring",
+            "entry_point": "consume",
+            "parameters": [
+              "--conf-file",
+              "file://conf/lendingclub_config.json"
+            ]
           }
         },
-        "spark_python_task": {
-          "python_file": "lendingclub_scoring/jobs/abtest_entrypoint.py",
-          "parameters": [
-            "--conf-file",
-            "conf/test/abtest.json"
-          ]
-        }
-      },
-      {
-        "name": "consumer-pipeline",
-        "new_cluster": {
-          "spark_version": "10.5.x-cpu-ml-scala2.12",
-          "num_workers": 0,
-          "node_type_id": "i3.xlarge",
-          "spark_conf": {
-            "spark.master": "local[*, 4]",
-            "spark.databricks.cluster.profile": "singleNode"
+        {
+          "name": "training-pipeline",
+          "new_cluster": {
+            "spark_version": "10.5.x-cpu-ml-scala2.12",
+            "node_type_id": "i3.xlarge",
+            "num_workers": 2
+          },
+          "python_wheel_task": {
+            "package_name": "lendingclub_scoring",
+            "entry_point": "train",
+            "parameters": [
+              "--conf-file",
+              "file://conf/lendingclub_config.json"
+            ]
           }
         },
-        "spark_python_task": {
-          "python_file": "lendingclub_scoring/jobs/consumer_entrypoint.py",
-          "parameters": [
-            "--conf-file",
-            "conf/lendingclub_config.json"
-          ]
-        }
-      },
-      {
-        "name": "training-pipeline",
-        "new_cluster": {
-          "spark_version": "10.5.x-cpu-ml-scala2.12",
-          "node_type_id": "i3.xlarge",
-          "num_workers": 2
-        },
-        "spark_python_task": {
-          "python_file": "lendingclub_scoring/jobs/train_entrypoint.py",
-          "parameters": [
-            "--conf-file",
-            "conf/lendingclub_config.json"
-          ]
-        }
-      },
-      {
-        "name": "model-eval-pipeline",
-        "new_cluster": {
-          "spark_version": "10.5.x-cpu-ml-scala2.12",
-          "num_workers": 0,
-          "node_type_id": "i3.xlarge",
-          "spark_conf": {
-            "spark.master": "local[*, 4]",
-            "spark.databricks.cluster.profile": "singleNode"
+        {
+          "name": "model-eval-pipeline",
+          "new_cluster": {
+            "spark_version": "10.5.x-cpu-ml-scala2.12",
+            "num_workers": 0,
+            "node_type_id": "i3.xlarge",
+            "spark_conf": {
+              "spark.master": "local[*, 4]",
+              "spark.databricks.cluster.profile": "singleNode"
+            }
+          },
+          "python_wheel_task": {
+            "package_name": "lendingclub_scoring",
+            "entry_point": "eval",
+            "parameters": [
+              "--conf-file",
+              "file://conf/lendingclub_config.json"
+            ]
           }
         },
-        "spark_python_task": {
-          "python_file": "lendingclub_scoring/jobs/model_eval_entrypoint.py",
-          "parameters": [
-            "--conf-file",
-            "conf/lendingclub_config.json"
-          ]
-        }
-      },
-      {
-        "name": "webhook-pipeline",
-        "new_cluster": {
-          "spark_version": "10.5.x-cpu-ml-scala2.12",
-          "node_type_id": "i3.xlarge",
-          "num_workers": 0,
-          "spark_conf": {
-            "spark.master": "local[*, 4]",
-            "spark.databricks.cluster.profile": "singleNode"
+        {
+          "name": "webhook-pipeline",
+          "new_cluster": {
+            "spark_version": "10.5.x-cpu-ml-scala2.12",
+            "node_type_id": "i3.xlarge",
+            "num_workers": 0,
+            "spark_conf": {
+              "spark.master": "local[*, 4]",
+              "spark.databricks.cluster.profile": "singleNode"
+            }
+          },
+          "spark_python_task": {
+            "python_file": "lendingclub_scoring/jobs/webhook_entrypoint.py",
+            "parameters": [
+              "--conf-file",
+              "file://conf/lendingclub_config.json"
+            ]
           }
         },
-        "spark_python_task": {
-          "python_file": "lendingclub_scoring/jobs/webhook_entrypoint.py",
-          "parameters": [
-            "--conf-file",
-            "conf/lendingclub_config.json"
-          ]
-        }
-      },
-      {
-        "name": "lendingclub_scoring_dbx-sample-integration-test",
-        "new_cluster": {
-          "spark_version": "10.5.x-cpu-ml-scala2.12",
-          "node_type_id": "i3.xlarge",
-          "num_workers": 0,
-          "spark_conf": {
-            "spark.master": "local[*, 4]",
-            "spark.databricks.cluster.profile": "singleNode"
+        {
+          "name": "lendingclub_scoring_dbx-sample-integration-test",
+          "new_cluster": {
+            "spark_version": "10.5.x-cpu-ml-scala2.12",
+            "node_type_id": "i3.xlarge",
+            "num_workers": 0,
+            "spark_conf": {
+              "spark.master": "local[*, 4]",
+              "spark.databricks.cluster.profile": "singleNode"
+            }
+          },
+          "spark_python_task": {
+            "python_file": "tests/integration/sample_test.py",
+            "parameters": [
+              "--conf-file",
+              "file://conf/lendingclub_config.json"
+            ]
           }
-        },
-        "spark_python_task": {
-          "python_file": "tests/integration/sample_test.py",
-          "parameters": [
-            "--conf-file",
-            "conf/lendingclub_config.json"
-          ]
         }
-      }
-    ]
+      ]
+    }
   }
 }

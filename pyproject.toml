@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "lendingclub"
+name = "lendingclub_scoring"
 version = "0.0.1"
 dependencies = [
     "mlflow",
@@ -24,6 +24,11 @@ test = [
     "black",
     "types-PyYAML"
 ]
+
+[project.scripts]
+train = "lendingclub_scoring.main_entrypoint:train"
+eval = "lendingclub_scoring.main_entrypoint:eval"
+consume = "lendingclub_scoring.main_entrypoint:consume"
 
 [tool.setuptools.packages.find]
 include = ["lendingclub_scoring*"]  # ["*"] by default

@@ -1,5 +1,5 @@
 import json
-from abc import ABC, abstractmethod
+from abc import ABC
 from argparse import ArgumentParser
 from logging import Logger
 from typing import Dict, Any
@@ -7,28 +7,16 @@ from typing import Dict, Any
 from pyspark.sql import SparkSession
 
 
-# abstract class for jobs
-class Job(ABC):
-    @abstractmethod
-    def init_adapter(self):
-        pass
-
-    def __init__(self, spark=None, init_conf=None):
-        self.spark = self._prepare_spark(spark)
+class JobContext(ABC):
+    def __init__(self):
+        self.spark = self._prepare_spark()
         self.logger = self._prepare_logger()
-        if init_conf:
-            self.conf = init_conf
-        else:
-            self.conf = self._provide_config()
-        self.init_adapter()
+        self.conf = self._provide_config()
         self._log_conf()
 
     @staticmethod
-    def _prepare_spark(spark) -> SparkSession:
-        if not spark:
-            return SparkSession.builder.getOrCreate()
-        else:
-            return spark
+    def _prepare_spark() -> SparkSession:
+        return SparkSession.builder.getOrCreate()
 
     def _provide_config(self):
         self.logger.info("Reading configuration from --conf-file job option")
@@ -68,7 +56,3 @@ class Job(ABC):
         self.logger.info("Launching job with configuration parameters:")
         for key, item in self.conf.items():
             self.logger.info(f"\t Parameter: {key:<30} with value => {item:<30}")
-
-    @abstractmethod
-    def launch(self):
-        pass

@@ -1,6 +1,5 @@
 import json
 import mlflow.tracking
-from databricks_registry_webhooks import RegistryWebhooksClient
 from mlflow.utils.rest_utils import http_request
 
 
@@ -23,6 +22,8 @@ def mlflow_call_endpoint(endpoint, method, body, creds):
 
 
 def setup_webhook_for_model(model_name: str, job_id: str, event: str):
+    from databricks_registry_webhooks import RegistryWebhooksClient
+
     for wh in RegistryWebhooksClient().list_webhooks(model_name=model_name):
         RegistryWebhooksClient().delete_webhook(wh.id)
     client = mlflow.tracking.client.MlflowClient()
