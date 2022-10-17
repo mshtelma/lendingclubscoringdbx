@@ -10,7 +10,7 @@ class SampleJobIntegrationTest(unittest.TestCase):
         self.test_config = {
             "output_format": "delta",
             "output_path": self.test_dir,
-            "model-name": "LendingClubScoringModel",
+            "model-name": "LendingClubScoringModelIntTest",
             "data-path": "dbfs:/databricks-datasets/samples/lending_club/parquet",
             "experiment-path": "/Shared/leclub_test",
         }

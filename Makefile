@@ -14,4 +14,4 @@ format:
 	black .
 
 lint:
-	prospector   --profile prospector.yaml && black --check lendingclub_scoring
+	prospector --with-tool mypy --profile prospector.yaml && black --check lendingclub_scoring

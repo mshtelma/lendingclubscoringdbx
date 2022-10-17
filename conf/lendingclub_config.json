@@ -5,7 +5,7 @@
   "output-path": "dbfs:/tmp/leout",
   "model-name": "LendingClubScoringModel",
   "training_promote_candidates": true,
-  "training_webhook_for_model_eval": true,
+  "training_webhook_for_model_eval": false,
   "training_webhook_event": "MODEL_VERSION_TRANSITIONED_TO_STAGING",
   "training_model_eval_job_id": "1483420",
   "training_webhook_model_eval_stage": "Staging",
