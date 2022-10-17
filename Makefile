@@ -1,5 +1,5 @@
 env:
-	rm -rf .venv && python -m venv .venv && source .venv/bin/activate && pip install -r unit-requirements.txt && pip install -e .
+	rm -rf .venv && python -m venv .venv && source .venv/bin/activate && pip install --upgrade pip &&  pip install -e .\[test]
 
 test:
 	pytest tests/unit
@@ -9,3 +9,9 @@ job:
 
 clean:
 	rm -rf *.egg-info && rm -rf .pytest_cache
+
+format:
+	black .
+
+lint:
+	prospector   --profile prospector.yaml && black --check lendingclub_scoring

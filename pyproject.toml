@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lendingclub"
+version = "0.0.1"
+dependencies = [
+    "mlflow",
+    "boto3",
+    "api_iam_helpers",
+    "python-dotenv==0.10.3",
+    "scikit-learn>=0.23.1",
+    "databricks-registry-webhooks"
+]
+
+[project.optional-dependencies]
+test = [
+    "dbx",
+    "pyspark",
+    "pytest",
+    "pytest-cov",
+    "prospector[with_mypy]",
+    "black",
+    "types-PyYAML"
+]
+
+[tool.setuptools.packages.find]
+include = ["lendingclub_scoring*"]  # ["*"] by default
+exclude = ["tests*"]  # empty by default
+#namespaces = false  # true by default
