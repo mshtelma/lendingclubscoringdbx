@@ -1,0 +1,13 @@
+{
+  "output_format": "delta",
+  "experiment-path": "/Shared/dbx/projects/lendingclubscoringdbx_int_test",
+  "data-path": "dbfs:/databricks-datasets/samples/lending_club/parquet",
+  "output-path": "dbfs:/tmp/leout_int_test",
+  "model-name": "LendingClubScoringModelIntTest",
+  "training_promote_candidates": false,
+  "training_webhook_for_model_eval": false,
+  "training_webhook_model_eval_stage": "Staging",
+  "model_eval_promote_model_to_stage": "Production",
+  "model_deployment_type": "none",
+  "consumer_stage": "Production"
+}

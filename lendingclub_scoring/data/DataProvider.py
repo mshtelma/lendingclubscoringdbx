@@ -35,7 +35,11 @@ class LendingClubDataProvider:
         self.limit = limit
 
     def load_and_transform_data(self) -> DataFrame:
-        df = self.spark.read.format("parquet").load(self.input_path)
+        if "select" in self.input_path:
+            df = self.spark.sql(self.input_path)
+        else:
+            df = self.spark.read.format("parquet").load(self.input_path)
+
         if self.limit:
             df = df.limit(self.limit)
 

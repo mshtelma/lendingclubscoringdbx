@@ -92,10 +92,11 @@
             }
           },
           "spark_python_task": {
-            "python_file": "tests/integration/sample_test.py",
+            "python_file": "file://tests/entrypoint.py",
             "parameters": [
               "--conf-file",
-              "file://conf/lendingclub_config.json"
+              "file:fuse://conf/lendingclub_config_int_test.json",
+              "--cov=lendingclub_scoring"
             ]
           }
         }
