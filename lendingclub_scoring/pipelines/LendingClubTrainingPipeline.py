@@ -25,7 +25,7 @@ class LendingClubTrainingPipeline:
     def train(self, x_train, x_test, y_train, y_test):
         mlflow.sklearn.autolog()
         # cl = LogisticRegression(random_state=42, max_iter=10)
-        with mlflow.start_run(run_name="Training"):
+        with mlflow.start_run(run_name="Training") as run:
             cl = RandomForestClassifier(n_estimators=20)
             cl.fit(x_train, y_train)
             signature = infer_signature(x_train, y_train)
@@ -36,7 +36,9 @@ class LendingClubTrainingPipeline:
                 cl, "model", registered_model_name=_model_name, signature=signature
             )
             mlflow.set_tag("action", "training")
-            self.eval_and_log_metrics(cl, x_test, y_test)
+            self.eval_and_log_metrics(
+                f"runs:/{run.info.run_uuid}/model", x_test, y_test
+            )
             if self.conf.get("training_webhook_for_model_eval", False):
                 setup_webhook_for_model(
                     self.model_name,
@@ -46,6 +48,14 @@ class LendingClubTrainingPipeline:
                     ),
                 )
 
-    def eval_and_log_metrics(self, estimator, x, y):
-        mlflow.sklearn.eval_and_log_metrics(estimator, x, y, prefix="val_")
+    def eval_and_log_metrics(self, model_uri, x, y):
+        _df = x.copy()
+        _df["y"] = y
+        mlflow.evaluate(
+            model=model_uri,
+            data=_df,
+            targets="y",
+            model_type="classifier",
+            evaluator_config={"log_model_explainability": False},
+        )
         mlflow.set_tag("candidate", "true")
