@@ -2,7 +2,7 @@ from typing import Tuple
 import numpy as np
 import pandas as pd
 from pyspark.sql import DataFrame
-from pyspark.sql.functions import regexp_replace, trim, substring, round
+from pyspark.sql.functions import regexp_replace, trim, substring, round, col
 from sklearn.model_selection import train_test_split
 
 
@@ -99,6 +99,7 @@ class LendingClubDataProvider:
         )
 
         df = df.withColumn("net", round(df.total_pymnt - df.loan_amnt, 2))
+        df = df.withColumn("net2", col("net"))
         df = df.select(
             "bad_loan",
             "term",
@@ -122,10 +123,10 @@ class LendingClubDataProvider:
         return df
 
     def handle_cat_types(self, df: pd.DataFrame):
-        for col in df.columns:
-            if df.dtypes[col] == "object":
-                df[col] = df[col].astype("category").cat.codes
-            df[col] = df[col].fillna(0)
+        for column in df.columns:
+            if df.dtypes[column] == "object":
+                df[column] = df[column].astype("category").cat.codes
+            df[column] = df[column].fillna(0)
         return df
 
     def prepare_training_and_test_sets(

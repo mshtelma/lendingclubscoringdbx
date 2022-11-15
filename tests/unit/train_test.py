@@ -1,13 +1,8 @@
-import unittest
-import tempfile
-
 import mlflow
-import pandas as pd
 import pytest
 from mlflow import MlflowClient
 from pyspark.sql import SparkSession, DataFrame
 
-from lendingclub_scoring.main_entrypoint import train
 from lendingclub_scoring.pipelines.LendingClubTrainingPipeline import (
     LendingClubTrainingPipeline,
 )

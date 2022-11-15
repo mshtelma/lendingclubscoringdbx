@@ -12,6 +12,8 @@ from lendingclub_scoring.pipelines.LendingClubTrainingPipeline import (
 
 
 def train():
+    import sys
+    print(sys.argv)
     ctx = JobContext()
     ctx.logger.info("Launching bootstrap job")
     _ = setup_mlflow_config(ctx.conf)
