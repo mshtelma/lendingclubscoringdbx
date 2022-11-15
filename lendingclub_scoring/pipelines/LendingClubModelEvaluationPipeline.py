@@ -1,4 +1,4 @@
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 
 import mlflow
 import mlflow.sklearn
@@ -18,7 +18,7 @@ class LendingClubModelEvaluationPipeline:
         spark: SparkSession,
         experiment_id: str,
         conf: Dict[str, str],
-        limit: int = None,
+        limit: Optional[int] = None,
     ):
         self.spark = spark
         self.conf = conf
