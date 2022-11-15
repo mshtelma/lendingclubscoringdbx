@@ -62,25 +62,6 @@
           }
         },
         {
-          "name": "webhook-pipeline",
-          "new_cluster": {
-            "spark_version": "10.5.x-cpu-ml-scala2.12",
-            "node_type_id": "i3.xlarge",
-            "num_workers": 0,
-            "spark_conf": {
-              "spark.master": "local[*, 4]",
-              "spark.databricks.cluster.profile": "singleNode"
-            }
-          },
-          "spark_python_task": {
-            "python_file": "lendingclub_scoring/jobs/webhook_entrypoint.py",
-            "parameters": [
-              "--conf-file",
-              "file://conf/lendingclub_config.json"
-            ]
-          }
-        },
-        {
           "name": "lendingclub_scoring_dbx-sample-integration-test",
           "new_cluster": {
             "spark_version": "10.5.x-cpu-ml-scala2.12",
