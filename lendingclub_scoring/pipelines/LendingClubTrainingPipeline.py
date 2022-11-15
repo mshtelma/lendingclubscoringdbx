@@ -4,7 +4,8 @@ import mlflow
 import mlflow.sklearn
 from mlflow.models import infer_signature
 from pyspark.sql import SparkSession
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+
 from lendingclub_scoring.data.DataProvider import LendingClubDataProvider
 from lendingclub_scoring.webhooks import setup_webhook_for_model
 
@@ -26,7 +27,7 @@ class LendingClubTrainingPipeline:
         mlflow.sklearn.autolog()
         # cl = LogisticRegression(random_state=42, max_iter=10)
         with mlflow.start_run(run_name="Training") as run:
-            cl = RandomForestClassifier(n_estimators=20)
+            cl = LogisticRegression(random_state=42, max_iter=10)
             cl.fit(x_train, y_train)
             signature = infer_signature(x_train, y_train)
             _model_name = None
